@@ -1,17 +1,20 @@
 package ua.skillsup.binarytree;
 
+import java.util.Objects;
+
 public class TreeSet {
 
     private Node root;
     private int size;
     private boolean isElement;
+    private static StringBuilder result = new StringBuilder();
 
     public void add(Object value) {
-        if ( value == null) {
+        if (Objects.isNull(value)) {
             System.out.println("\nThe value must not be equals null.");
-                return;
+            return;
         }
-        if (root == null) {
+        if (Objects.isNull(root)) {
             root = new Node(value);
             size++;
             return;
@@ -34,7 +37,7 @@ public class TreeSet {
     }
 
     private void addLeft(Node current, Object value) {
-        if (current.getLeft() != null) {
+        if (Objects.nonNull(current.getLeft())) {
             add(current.getLeft(), value);
         } else {
             current.setLeft(new Node(value));
@@ -43,9 +46,9 @@ public class TreeSet {
     }
 
     private void addRight(Node current, Object value) {
-        if (current.getRight() != null){
+        if (Objects.nonNull(current.getRight())) {
             add(current.getRight(), value);
-        } else{
+        } else {
             current.setRight(new Node(value));
             size++;
         }
@@ -60,7 +63,7 @@ public class TreeSet {
     }
 
     public boolean contains(Object value) {
-        if (isEmpty()){
+        if (isEmpty()) {
             return false;
         }
 
@@ -74,34 +77,31 @@ public class TreeSet {
     private void find(Node current, Object value) {
         if (value.equals(current.getValue())) {
             isElement = true;
-            return ;
+            return;
         }
 
         if (value.hashCode() < current.getValue().hashCode()) {
-            if (current.getLeft() != null) {
+            if (Objects.nonNull(current.getLeft())) {
                 find(current.getLeft(), value);
             }
         } else if (value.hashCode() > current.getValue().hashCode()) {
-            if (current.getRight() != null) {
+            if (Objects.nonNull(current.getRight())) {
                 find(current.getRight(), value);
             }
         }
 
     }
 
-    public void show() {
-        if (isEmpty()) {
-            System.out.println("Set is empty.");
-            return;
-        }
-        System.out.println("\n");
+    public String show() {
+        result.setLength(0);
         display(root);
+        return result.toString();
     }
 
     private static void display(Node node) {
-        if (node != null) {
+        if (Objects.nonNull(node)) {
             display(node.left);
-            System.out.print(" " + node.value);
+            result.append(node.getValue().toString());
             display(node.right);
         }
     }
