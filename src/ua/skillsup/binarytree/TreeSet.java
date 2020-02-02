@@ -8,12 +8,8 @@ public class TreeSet {
 
     public void add(Object value) {
         if ( value == null) {
-            try {
-                throw new NullPointerException();
-            } catch (NullPointerException e){
-                System.out.println("\nThe value must not be equals null.");
+            System.out.println("\nThe value must not be equals null.");
                 return;
-            }
         }
         if (root == null) {
             root = new Node(value);

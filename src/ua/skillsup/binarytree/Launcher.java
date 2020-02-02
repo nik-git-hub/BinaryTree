@@ -34,12 +34,8 @@ public class Launcher {
 
     private static void contains(TreeSet set, Object value) {
         if ( value == null) {
-            try {
-                throw new NullPointerException();
-            } catch (NullPointerException e){
-                System.out.println("\nThe value must not be equals null.");
-                return;
-            }
+            System.out.println("\nThe value must not be equals null.");
+            return;
         }
         if (set.contains(value)) {
             System.out.println("\nSet contains this value. " + value.toString());
